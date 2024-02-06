@@ -4,5 +4,8 @@
 .active {
     @apply cursor-pointer text-sm font-semibold text-black border-b-[4px] border-b-red-700 
 }
+.sign-bg{
+    @apply bg-gradient-to-br from-red-300 to-red-100
+}
 
 @tailwind utilities;

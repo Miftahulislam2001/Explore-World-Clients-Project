@@ -8,8 +8,8 @@ const Navbar = () => {
     return (
         <div className='bg-white border-b shadow-sm sticky top-0 z-10 '>
             <nav className='flex justify-between items-center px-3 max-w-5xl mx-auto'>
-                
-                <div className='cursor-pointer' onClick={()=> navigate("/")}>
+
+                <div className='cursor-pointer' onClick={() => navigate("/")}>
                     <h2 className='font-bold text-2xl py-3 text-red-800 font-serif'>ExploreWorld</h2>
                 </div>
 
