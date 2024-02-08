@@ -4,7 +4,7 @@ const CreateListing = () => {
   const [formData, setFormData] = useState({
     type: "rent",
     name: "",
-    bedroom: 1,
+    bedrooms: 1,
     bathrooms: 1,
     parking: false,
     furnished: false,
@@ -17,7 +17,7 @@ const CreateListing = () => {
   const {
     type,
     name,
-    bedroom,
+    bedrooms,
     bathrooms,
     parking,
     furnished,
@@ -27,40 +27,63 @@ const CreateListing = () => {
     regularPrice,
     discountPrice,
   } = formData;
-  const onChange = () => {};
+
+
+  const onChange = (event) => {
+    let boolean = null;
+    if(event.target.value === "true"){
+        boolean = true;
+    }
+    if(event.target.value === "false"){
+        boolean = false;
+    }
+    // Files
+    if(event.target.files){
+        setFormData((prevState)=>({
+            ...prevState,
+            images: event.target.files
+        }))
+    }
+    // Text/Boolean/Number
+    if(!event.target.files){
+        setFormData((prevState)=>({
+            ...prevState,
+            [event.target.id]: boolean ?? event.target.value
+        }))
+    }
+  };
 
   return (
-    <div className="max-w-md px-2 mx-auto">
+    <div className="max-w-xl px-2 mx-auto">
       <h1 className="text-3xl text-center mt-6 font-bold">Create a Listing</h1>
       <form>
         <p className="text-lg mt-6 font-semibold">Sell / Rent</p>
-        <div className="flex mb-6">
+        <div className="flex">
           <button
+            type="button"
+            id="type"
+            value="sale"
+            onClick={onChange}
             className={`mr-3 px-7 py-3 font-medium text-sm uppercase shadow-md rounded hover:shadow-lg focus:shadow-lg active:shadow-lg transition duration-150 ease-in-out w-full ${
               type === "rent"
                 ? "bg-white text-black"
-                : "bg-slate-500 text-white"
+                : "bg-slate-600 text-white"
             }`}
-            type="button"
-            id="type"
-            value="sale"
-            onClick={onChange}
           >
-            Sell
+            sell
           </button>
-
           <button
-            className={`px-7 py-3 font-medium text-sm uppercase shadow-md rounded hover:shadow-lg focus:shadow-lg active:shadow-lg transition duration-150 ease-in-out w-full ${
-              type === "sell"
-                ? "bg-white text-black"
-                : "bg-slate-500 text-white"
-            }`}
             type="button"
             id="type"
-            value="sale"
+            value="rent"
             onClick={onChange}
+            className={`ml-3 px-7 py-3 font-medium text-sm uppercase shadow-md rounded hover:shadow-lg focus:shadow-lg active:shadow-lg transition duration-150 ease-in-out w-full ${
+              type === "sale"
+                ? "bg-white text-black"
+                : "bg-slate-600 text-white"
+            }`}
           >
-            Rent
+            rent
           </button>
         </div>
 
@@ -83,7 +106,7 @@ const CreateListing = () => {
             <input
               type="number"
               id="bedrooms"
-              value={bedroom}
+              value={bedrooms}
               onChange={onChange}
               minLength="1"
               maxLength="50"
@@ -107,28 +130,27 @@ const CreateListing = () => {
         </div>
         <p className="text-lg mt-6 font-semibold">Parking spot</p>
         <div className="flex mb-6">
-          <button
-            className={`mr-3 px-7 py-3 font-medium text-sm uppercase shadow-md rounded hover:shadow-lg focus:shadow-lg active:shadow-lg transition duration-150 ease-in-out w-full ${
-              !parking ? "bg-white text-black" : "bg-slate-500 text-white"
-            }`}
+        <button
             type="button"
             id="parking"
             value={true}
             onClick={onChange}
+            className={`mr-3 px-7 py-3 font-medium text-sm uppercase shadow-md rounded hover:shadow-lg focus:shadow-lg active:shadow-lg transition duration-150 ease-in-out w-full ${
+              !parking ? "bg-white text-black" : "bg-slate-600 text-white"
+            }`}
           >
             Yes
           </button>
-
           <button
-            className={`px-7 py-3 font-medium text-sm uppercase shadow-md rounded hover:shadow-lg focus:shadow-lg active:shadow-lg transition duration-150 ease-in-out w-full ${
-              parking ? "bg-white text-black" : "bg-slate-500 text-white"
-            }`}
             type="button"
             id="parking"
-            value="sale"
+            value={false}
             onClick={onChange}
+            className={`ml-3 px-7 py-3 font-medium text-sm uppercase shadow-md rounded hover:shadow-lg focus:shadow-lg active:shadow-lg transition duration-150 ease-in-out w-full ${
+              parking ? "bg-white text-black" : "bg-slate-600 text-white"
+            }`}
           >
-            No
+            no
           </button>
         </div>
         <p className="text-lg mt-6 font-semibold">Furnished Spot</p>
