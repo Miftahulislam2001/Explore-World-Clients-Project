@@ -1,16 +1,36 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { IoEye } from "react-icons/io5";
 import { IoMdEyeOff } from "react-icons/io";
 import { Link } from "react-router-dom";
 import { FcGoogle } from "react-icons/fc";
 import { AiFillGithub } from "react-icons/ai";
+import { AuthContext } from "../Provider/AuthProvider";
 
 const SignIn = () => {
+
   const [showPassword, setShowPassword] = useState(false);
+  const { signInUser, signInWithGoogle, signInWithGitHub} = useContext(AuthContext)
+
+  const handleSignIn = (event) => {
+    event.preventDefault();
+    const form = event.target;
+    const email = form.email.value;
+    const password = form.password.value;
+
+
+    signInUser(email, password)
+      .then(result => {
+        form.reset()
+     
+      })
+      .catch(error => {
+        setError(error.message)
+      })
+  }
 
   return (
     <div className="sign-bg">
-      <h2 className="text-3xl text-center mt-6 font-bold p-5">Sign In</h2>
+      <h2 className="text-3xl text-center mt-6 font-bold p-5 text-red-900">Sign In</h2>
 
       <div className="flex justify-center flex-wrap items-center px-6 py-12 max-w-6xl mx-auto ">
         <div className="md:w-[65%] lg:w-[50%] mb-12 md:mb-6 ">
@@ -22,7 +42,7 @@ const SignIn = () => {
         </div>
 
         <div className="w-full md:w-[65%] lg:w-[40%] lg:ml-20">
-          <form>
+          <form onSubmit={handleSignIn}>
             <input
               type="email"
               name="email"
@@ -57,12 +77,12 @@ const SignIn = () => {
               </div>
 
               <div>
-                <button className="px-[10px] py-1 bg-white text-gray-600 font-semibold border border-gray-200 rounded w-full flex justify-center items-center gap-[6px] mt-[33px] shadow-md transition duration-150 ease-in-out hover:shadow-xl">
+                <button onClick={signInWithGoogle} className="px-[10px] py-1 bg-white text-gray-600 font-semibold border border-gray-200 rounded w-full flex justify-center items-center gap-[6px] mt-[33px] shadow-md transition duration-150 ease-in-out hover:shadow-xl">
                   <FcGoogle className="text-[32px]" />
                   <span>Continue with Google</span>
                 </button>
 
-                <button className="px-[10px] py-1 text-gray-600 font-semibold bg-white border border-gray-200 rounded w-full flex justify-center items-center gap-[6px] mt-[10px] shadow-md transition duration-150 ease-in-out hover:shadow-xl">
+                <button onClick={signInWithGitHub} className="px-[10px] py-1 text-gray-600 font-semibold bg-white border border-gray-200 rounded w-full flex justify-center items-center gap-[6px] mt-[10px] shadow-md transition duration-150 ease-in-out hover:shadow-xl">
                   <AiFillGithub className="text-[32px]" />
                   <span>Continue with Github</span>
                 </button>
@@ -72,7 +92,7 @@ const SignIn = () => {
                 <p>
                   Don't Have a account?
                   <Link
-                    className="text-red-800 hover:text-red-600 transition duration-200 ease-in-out"
+                    className="text-blue-500 hover:text-blue-800 transition duration-200 ease-in-out"
                     to="/sign-up"
                   >
                     {" "}

@@ -14,6 +14,7 @@ import SignIn from './Pages/SignIn.jsx';
 import SignUp from './Pages/SignUp.jsx';
 import ForgetPassword from './Pages/ForgetPassword.jsx';
 import Home from './Pages/Home.jsx';
+import AuthProvider from './Provider/AuthProvider.jsx';
 
 const router = createBrowserRouter([
   {
@@ -54,6 +55,8 @@ const router = createBrowserRouter([
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
+    <AuthProvider>
     <RouterProvider router={router} />
+    </AuthProvider>
   </React.StrictMode>,
 )
