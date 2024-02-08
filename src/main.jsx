@@ -2,6 +2,7 @@ import React from 'react'
 import ReactDOM from 'react-dom/client'
 import App from './App.jsx'
 import './index.css'
+import { Toaster } from 'react-hot-toast';
 import {
   createBrowserRouter,
   RouterProvider,
@@ -15,6 +16,7 @@ import SignUp from './Pages/SignUp.jsx';
 import ForgetPassword from './Pages/ForgetPassword.jsx';
 import Home from './Pages/Home.jsx';
 import AuthProvider from './Provider/AuthProvider.jsx';
+import PrivateRoute from './Private/PrivateRoute.jsx';
 
 const router = createBrowserRouter([
   {
@@ -27,7 +29,7 @@ const router = createBrowserRouter([
       },
       {
         path: "/profile",
-        element: <Profile/>
+        element: <PrivateRoute><Profile/></PrivateRoute>
       },
       {
         path: "/blog",
@@ -35,7 +37,7 @@ const router = createBrowserRouter([
       },
       {
         path: "/offers",
-        element: <Offers/>
+        element: <PrivateRoute><Offers/></PrivateRoute>
       },
       {
         path: "/sign-in",
@@ -57,6 +59,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <AuthProvider>
     <RouterProvider router={router} />
+    <Toaster/>
     </AuthProvider>
   </React.StrictMode>,
 )
