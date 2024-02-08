@@ -1,5 +1,7 @@
 import React, { useContext, useState } from "react";
 import { AuthContext } from "../Provider/AuthProvider";
+import { FcHome } from "react-icons/fc";
+import { Link } from "react-router-dom";
 
 const Profile = () => {
   const [changeProfileInfo, setChangeProfileInfo] = useState(false);
@@ -38,6 +40,9 @@ const Profile = () => {
               </p>
             </div>
           </form>
+          <button className="w-full py-2 bg-blue-600 text-white uppercase px-7 text-sm font-medium rounded shadow-md hover:bg-blue-700 transition duration-100 ease-in-out hover:shadow-lg active:bg-blue-900">
+           <Link to="/create-listing" className="flex justify-center items-center"><FcHome className="mr-2 text-3xl bg-red-200 rounded-full p-1 "/>Sell or rent your Home</Link>
+            </button>
         </div>
       </section>
     </>

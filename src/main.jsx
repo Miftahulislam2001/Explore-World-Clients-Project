@@ -17,6 +17,7 @@ import ForgetPassword from './Pages/ForgetPassword.jsx';
 import Home from './Pages/Home.jsx';
 import AuthProvider from './Provider/AuthProvider.jsx';
 import PrivateRoute from './Private/PrivateRoute.jsx';
+import CreateListing from './Pages/CreateListing.jsx';
 
 const router = createBrowserRouter([
   {
@@ -50,6 +51,10 @@ const router = createBrowserRouter([
       {
         path: "/forget-password",
         element: <ForgetPassword/>
+      },
+      {
+        path: "/create-listing",
+        element: <CreateListing/>
       },
     ]
   },

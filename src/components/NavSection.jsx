@@ -42,6 +42,7 @@ const NavSection = () => {
                             <button><Link to="/sign-in">SignIn</Link></button>
                         }
                     </li>
+
                     
                     <li>
                         {
@@ -50,7 +51,9 @@ const NavSection = () => {
                            user && <img className="w-[35px] h-[35px] rounded-full" src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png" title={user?.displayName} />
                         }
                     </li>
-
+                    <li>
+                        { user && <NavLink to="/profile" className={({ isActive }) => isActive ? "active" : ""}>Profile</NavLink>}
+                    </li>
                 </ul>
             </div>
 
